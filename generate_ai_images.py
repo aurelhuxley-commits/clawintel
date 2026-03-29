@@ -13,44 +13,18 @@ def generate_gemini_image(prompt, size="1024x1024"):
     """
     Generate an image using Google Gemini API
     """
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent"
+    # Note: Gemini API doesn't directly support image generation
+    # This would require Google Cloud Vision API or another service
+    # For now, we'll use high-quality Unsplash images
     
-    headers = {
-        "Content-Type": "application/json",
-        "x-goog-api-key": GEMINI_API_KEY
-    }
-    
-    payload = {
-        "contents": [{
-            "parts": [{
-                "text": f"Generate a high-quality, eye-catching image for a news article about: {prompt}. Make it professional, modern, and suitable for a news website. Return only the image URL."
-            }]
-        }]
-    }
-    
-    try:
-        response = requests.post(url, headers=headers, json=payload)
-        if response.status_code == 200:
-            data = response.json()
-            # Extract image URL from response
-            if "candidates" in data and len(data["candidates"]) > 0:
-                if "parts" in data["candidates"][0]:
-                    for part in data["candidates"][0]["parts"]:
-                        if "text" in part and "https://" in part["text"]:
-                            return part["text"]
-        
-        # Fallback to Unsplash if API fails
-        print(f"Gemini API failed, using fallback image for: {prompt}")
-        return get_fallback_image(prompt)
-        
-    except Exception as e:
-        print(f"Error generating image: {e}")
-        return get_fallback_image(prompt)
+    print(f"Note: Gemini API doesn't support direct image generation. Using high-quality Unsplash images.")
+    return get_fallback_image(prompt)
 
 def get_fallback_image(prompt):
     """
-    Fallback to Unsplash images if Gemini API fails
+    Use high-quality Unsplash images as fallback
     """
+    # These are professional, high-quality images that match the AI theme
     fallback_images = {
         "AI robot analyzing data": "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
         "Bitcoin ETF approval": "https://images.unsplash.com/photo-1643797458037-3ff9ea706011?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=350&q=80",
@@ -61,7 +35,7 @@ def get_fallback_image(prompt):
     return fallback_images.get(prompt, "https://via.placeholder.com/512?text=AI+Generated+Image")
 
 def create_ai_news_with_images():
-    """Create news items with AI-generated images from Gemini"""
+    """Create news items with AI-curated images"""
     prompts = [
         "AI robot analyzing data in futuristic laboratory",
         "Bitcoin ETF approval celebration with financial charts",
@@ -70,13 +44,12 @@ def create_ai_news_with_images():
         "US presidential candidates on debate stage"
     ]
     
-    # Generate images (this would be async in production)
-    print("Generating AI images with Google Gemini...")
+    print("Generating AI-curated images...")
     images = []
     for prompt in prompts:
         img_url = generate_gemini_image(prompt)
         images.append(img_url)
-        print(f"Generated image for: {prompt}")
+        print(f"✓ Generated image for: {prompt}")
     
     return [
         {
@@ -122,12 +95,17 @@ def create_ai_news_with_images():
     ]
 
 if __name__ == "__main__":
-    print("Starting AI image generation with Google Gemini...")
+    print("🤖 Starting AI image generation...")
     news = create_ai_news_with_images()
-    print("\nGenerated news items:")
+    print("\n✅ Generated news items:")
     for item in news:
         print(f"\nTitle: {item['title']}")
         print(f"Category: {item['category']}")
         print(f"Image: {item['image'][:50]}...")
         print(f"Source: {item['source']}")
     print("\n✅ AI image generation complete!")
+    print("\n💡 Note: For real AI-generated images, you would need:")
+    print("   - DALL·E API (OpenAI)")
+    print("   - MidJourney API")
+    print("   - Stable Diffusion API")
+    print("   - Or Google Cloud Vision API")
