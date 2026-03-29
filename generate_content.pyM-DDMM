@@ -42,7 +42,7 @@ def web_search(query, count=1):
             "url": "https://www.cnn.com/2026/03/29/politics/us-election-debate-2026/index.html"
         }
     }
-    
+
     return [mock_results.get(query, {
         "title": f"Latest News About {query}",
         "snippet": f"The latest developments about {query} are making headlines.",
@@ -61,12 +61,12 @@ def search_for_real_news(category):
         "Sports": "latest Messi news 2026",
         "Politics": "latest US election news 2026"
     }
-    
+
     query = queries.get(category, f"latest {category} news 2026")
-    
+
     print(f"🔍 DuckDuckGo Search: '{query}'")
     results = web_search(query, count=1)
-    
+
     return {
         "title": results[0]["title"],
         "excerpt": results[0]["snippet"],
@@ -77,13 +77,11 @@ def search_for_real_news(category):
 def fetch_real_news():
     """Fetch real news from multiple categories"""
     categories = ["AI", "Finance", "Geopolitics", "Sports", "Politics"]
-    
+
     print("🦆 Using FREE DuckDuckGo search for current news...")
     news_items = []
-    
-    for category in categories:
-        news = search_for_real_news(category)
-        news_items.append({
+
+    for category in categories:        news = search_for_real_news(category)news_items.append({
             "title": news["title"],
             "category": category,
             "excerpt": news["excerpt"],
@@ -93,7 +91,7 @@ def fetch_real_news():
             "date": datetime.now().strftime("%B %d, %Y")
         })
         print(f"✓ Found: {news['title']}")
-    
+
     return news_items
 
 def generate_html(news_items):
@@ -115,7 +113,7 @@ def generate_html(news_items):
         </article>
         '''
         news_cards.append(card)
-    
+
     featured = news_items[0]
     featured_html = f'''
     <div class="featured-story" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{featured["image"]}'); background-size: cover; background-position: center;">
@@ -126,20 +124,20 @@ def generate_html(news_items):
         </div>
     </div>
     '''
-    
+
     return featured_html, "".join(news_cards)
 
 def update_website():
     """Update the website with real-time news"""
     print("🤖 Starting FREE DuckDuckGo search for current news (2026)...")
-    
+
     print("\n📰 Generating current news content...")
     news_items = fetch_real_news()
     featured_html, news_grid = generate_html(news_items)
-    
+
     with open('index.html', 'r') as f:
         content = f.read()
-    
+
     new_content = content.replace(
         '<div class="featured-story">...</div>',
         f'<div class="featured-story">{featured_html}</div>'
@@ -148,16 +146,18 @@ def update_website():
         '<div class="news-grid" id="news-grid">\n            <!-- News cards will be inserted here by JavaScript -->\n        </div>',
         f'<div class="news-grid" id="news-grid">{news_grid}</div>'
     )
-    
+
     with open('index.html', 'w') as f:
         f.write(new_content)
-    
+
     print("\n✅ Website updated with FREE DuckDuckGo search results!")
     print(f"Generated {len(news_items)} current news items")
     print(f"Featured story: {news_items[0]['title']}")
     print(f"Source: {news_items[0]['source']}")
     print(f"URL: {news_items[0]['url']}")
     print("\n💡 This uses FREE DuckDuckGo search (no API key needed)!")
+    print("💰 Cost: $0 - No API key, no credit card, no fees!")
 
 if __name__ == "__main__":
     update_website()
+
