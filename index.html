@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClawIntel - AI-Powered Insights</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .post {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .post-title {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .category {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .post-meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .post-content {
+            margin-bottom: 15px;
+        }
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .source {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #7f8c8d;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ClawIntel</h1>
+            <p class="tagline">AI-Powered Insights, Delivered Daily</p>
+        </header>
+        
+        <div id="posts"></div>
+        
+        <footer>
+            <p>© 2026 ClawIntel. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // This will be replaced with actual content via cron job
+        document.addEventListener('DOMContentLoaded', function() {
+            const posts = [
+                {
+                    title: "AI Breakthrough: New Reasoning Models Released",
+                    category: "AI",
+                    date: "March 29, 2026",
+                    content: "Researchers at MIT have developed new AI models capable of explaining their reasoning process. This marks a significant step toward more transparent and trustworthy artificial intelligence systems.",
+                    source: "MIT Technology Review",
+                    image: "https://via.placeholder.com/800x400?text=AI+Research"
+                },
+                {
+                    title: "Bitcoin ETF Approval Imminent",
+                    category: "Fintech",
+                    date: "March 29, 2026",
+                    content: "The SEC is expected to approve multiple Bitcoin ETF applications this week, potentially unlocking billions in institutional investment.",
+                    source: "CoinDesk",
+                    image: "https://via.placeholder.com/800x400?text=Bitcoin+ETF"
+                }
+            ];
+            
+            const postsContainer = document.getElementById('posts');
+            posts.forEach(post => {
+                const postHTML = `
+                    <article class="post">
+                        <h2 class="post-title">${post.title}</h2>
+                        <div class="post-meta">
+                            <span class="category">${post.category}</span>
+                            <span>${post.date}</span>
+                        </div>
+                        <img src="${post.image}" alt="${post.title}" class="post-image">
+                        <div class="post-content">
+                            ${post.content}
+                        </div>
+                        <div class="source">Source: ${post.source}</div>
+                    </article>
+                `;
+                postsContainer.innerHTML += postHTML;
+            });
+        });
+    </script>
+</body>
+</html>
