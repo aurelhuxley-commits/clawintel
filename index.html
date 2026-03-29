@@ -3,176 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClawIntel - AI-Powered Insights</title>
+    <title>ClawIntel - Global News & Insights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent: #0078d7;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f9f9f9;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
+        
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
+        
         header {
-            background: #2c3e50;
-            color: white;
+            background-color: var(--dark-bg);
             padding: 20px 0;
-            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        .search-bar {
+            margin: 20px 0;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: var(--text-primary);
+        }
+        
+        .featured-story {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1200x400?text=Featured+Story');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            color: white;
             margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
         }
-        h1 {
-            margin: 0;
+        
+        .featured-content {
+            padding: 40px;
+            max-width: 600px;
+        }
+        
+        .featured-category {
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .featured-title {
             font-size: 2.5em;
+            margin: 0 0 15px 0;
         }
-        .tagline {
-            font-size: 1.2em;
+        
+        .featured-excerpt {
+            font-size: 1.1em;
             opacity: 0.9;
         }
-        .post {
-            background: white;
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .news-card {
+            background-color: var(--card-bg);
             border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .news-content {
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .post-title {
-            color: #2c3e50;
-            margin-top: 0;
-        }
-        .category {
-            display: inline-block;
-            background: #3498db;
+        
+        .news-category {
+            background-color: var(--accent);
             color: white;
             padding: 3px 8px;
             border-radius: 3px;
-            font-size: 0.8em;
-            margin-right: 5px;
-        }
-        .post-meta {
-            color: #7f8c8d;
-            font-size: 0.9em;
+            font-size: 0.7em;
+            display: inline-block;
             margin-bottom: 10px;
         }
-        .post-content {
+        
+        .news-title {
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+            color: var(--text-primary);
+        }
+        
+        .news-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9em;
             margin-bottom: 15px;
         }
-        .post-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 10px;
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.8em;
         }
+        
         .source {
-            font-size: 0.9em;
-            color: #7f8c8d;
+            color: var(--accent);
         }
+        
         footer {
+            background-color: #000;
+            color: var(--text-secondary);
+            padding: 30px 0;
             text-align: center;
-            padding: 20px 0;
-            color: #7f8c8d;
-            margin-top: 40px;
-            border-top: 1px solid #eee;
+            margin-top: 50px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--text-secondary);
+            margin: 0 10px;
+            font-size: 1.5em;
+        }
+        
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-title {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>ClawIntel</h1>
-            <p class="tagline">AI-Powered Insights, Delivered Daily</p>
+            <div class="header-content">
+                <a href="/" class="logo">ClawIntel</a>
+                <nav>
+                    <a href="#ai">AI</a>
+                    <a href="#politics">Politics</a>
+                    <a href="#finance">Finance</a>
+                    <a href="#geopolitics">Geopolitics</a>
+                    <a href="#sports">Sports</a>
+                </nav>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search news...">
+            </div>
         </header>
         
-        <div id="posts">
-        <article class="post">
-            <h2 class="post-title">AI Breakthrough: New Reasoning Models Released</h2>
-            <div class="post-meta">
-                <span class="category">AI</span>
-                <span>March 29, 2026</span>
+        <div class="featured-story">
+            <div class="featured-content">
+                <span class="featured-category">AI</span>
+                <h1 class="featured-title">AI Breakthrough: New Reasoning Models Released</h1>
+                <p class="featured-excerpt">Researchers at MIT have developed new AI models capable of explaining their reasoning process, marking a significant step toward more transparent and trustworthy artificial intelligence systems.</p>
             </div>
-            <img src="https://via.placeholder.com/800x400?text=AI+Research" alt="AI Breakthrough: New Reasoning Models Released" class="post-image">
-            <div class="post-content">
-                Researchers at MIT have developed new AI models capable of explaining their reasoning process. This marks a significant step toward more transparent and trustworthy artificial intelligence systems.
-            </div>
-            <div class="source">Source: MIT Technology Review</div>
-        </article>
+        </div>
         
-        <article class="post">
-            <h2 class="post-title">Bitcoin ETF Approval Imminent</h2>
-            <div class="post-meta">
-                <span class="category">Fintech</span>
-                <span>March 29, 2026</span>
-            </div>
-            <img src="https://via.placeholder.com/800x400?text=Bitcoin+ETF" alt="Bitcoin ETF Approval Imminent" class="post-image">
-            <div class="post-content">
-                The SEC is expected to approve multiple Bitcoin ETF applications this week, potentially unlocking billions in institutional investment.
-            </div>
-            <div class="source">Source: CoinDesk</div>
-        </article>
-        
-        <article class="post">
-            <h2 class="post-title">NATO Expands Eastern Europe Presence</h2>
-            <div class="post-meta">
-                <span class="category">Geopolitics</span>
-                <span>March 29, 2026</span>
-            </div>
-            <img src="https://via.placeholder.com/800x400?text=NATO+Meeting" alt="NATO Expands Eastern Europe Presence" class="post-image">
-            <div class="post-content">
-                In response to ongoing tensions, NATO has announced plans to increase its military presence in Eastern European member states.
-            </div>
-            <div class="source">Source: Reuters</div>
-        </article>
+        <div class="news-grid" id="news-grid">
+            <!-- News cards will be inserted here by JavaScript -->
         </div>
         
         <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
             <p>© 2026 ClawIntel. All rights reserved.</p>
         </footer>
     </div>
     
     <script>
-        // This will be replaced with actual content via cron job
-        document.addEventListener('DOMContentLoaded', function() {
-            const posts = [
-                {
-                    title: "AI Breakthrough: New Reasoning Models Released",
-                    category: "AI",
-                    date: "March 29, 2026",
-                    content: "Researchers at MIT have developed new AI models capable of explaining their reasoning process. This marks a significant step toward more transparent and trustworthy artificial intelligence systems.",
-                    source: "MIT Technology Review",
-                    image: "https://via.placeholder.com/800x400?text=AI+Research"
-                },
-                {
-                    title: "Bitcoin ETF Approval Imminent",
-                    category: "Fintech",
-                    date: "March 29, 2026",
-                    content: "The SEC is expected to approve multiple Bitcoin ETF applications this week, potentially unlocking billions in institutional investment.",
-                    source: "CoinDesk",
-                    image: "https://via.placeholder.com/800x400?text=Bitcoin+ETF"
-                }
-            ];
-            
-            const postsContainer = document.getElementById('posts');
-            posts.forEach(post => {
-                const postHTML = `
-                    <article class="post">
-                        <h2 class="post-title">${post.title}</h2>
-                        <div class="post-meta">
-                            <span class="category">${post.category}</span>
-                            <span>${post.date}</span>
-                        </div>
-                        <img src="${post.image}" alt="${post.title}" class="post-image">
-                        <div class="post-content">
-                            ${post.content}
-                        </div>
-                        <div class="source">Source: ${post.source}</div>
-                    </article>
-                `;
-                postsContainer.innerHTML += postHTML;
-            });
+        // Sample news data (will be replaced by real news via cron job)
+        const newsData = [
+            {
+                title: "Bitcoin ETF Approval Imminent",
+                category: "Finance",
+                excerpt: "The SEC is expected to approve multiple Bitcoin ETF applications this week, potentially unlocking billions in institutional investment.",
+                source: "CoinDesk",
+                image: "https://via.placeholder.com/350x200?text=Bitcoin+ETF",
+                date: "March 29, 2026"
+            },
+            {
+                title: "NATO Expands Eastern Europe Presence",
+                category: "Geopolitics",
+                excerpt: "In response to ongoing tensions, NATO has announced plans to increase its military presence in Eastern European member states.",
+                source: "Reuters",
+                image: "https://via.placeholder.com/350x200?text=NATO+Meeting",
+                date: "March 29, 2026"
+            },
+            {
+                title: "Messi Signs with Inter Miami",
+                category: "Sports",
+                excerpt: "Lionel Messi has officially signed with Inter Miami, marking a historic moment for Major League Soccer.",
+                source: "ESPN",
+                image: "https://via.placeholder.com/350x200?text=Messi+Inter+Miami",
+                date: "March 29, 2026"
+            },
+            {
+                title: "US Election Debate Scheduled",
+                category: "Politics",
+                excerpt: "The first presidential debate of the 2026 election cycle has been scheduled for next month.",
+                source: "CNN",
+                image: "https://via.placeholder.com/350x200?text=US+Debate",
+                date: "March 29, 2026"
+            }
+        ];
+        
+        // Generate news cards
+        const newsGrid = document.getElementById('news-grid');
+        newsData.forEach(news => {
+            const card = document.createElement('article');
+            card.className = 'news-card';
+            card.innerHTML = `
+                <img src="${news.image}" alt="${news.title}" class="news-image">
+                <div class="news-content">
+                    <span class="news-category">${news.category}</span>
+                    <h3 class="news-title">${news.title}</h3>
+                    <p class="news-excerpt">${news.excerpt}</p>
+                    <div class="news-meta">
+                        <span>${news.date}</span>
+                        <span class="source">${news.source}</span>
+                    </div>
+                </div>
+            `;
+            newsGrid.appendChild(card);
         });
     </script>
 </body>

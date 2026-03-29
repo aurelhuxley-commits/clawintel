@@ -1,13 +1,14 @@
 # ClawIntel
 
-AI-Powered Insights, Delivered Daily
+**BBC/CurrentAffairs.org-style news website with real-time updates**
 
 ## Features
 
-- **Automated Content Generation**: Daily news updates across multiple categories
-- **Beautiful Design**: Clean, responsive website
-- **Self-Updating**: No manual intervention required
-- **Multi-Topic Coverage**: AI, Fintech, Geopolitics, Startups, Sports, Politics
+- **Professional Design**: Dark theme with responsive grid layout
+- **Real News Integration**: Fetches and displays real news from multiple sources
+- **Auto-Updates**: Updates every 2 hours with fresh content
+- **Multi-Category Coverage**: AI, Finance, Geopolitics, Sports, Politics
+- **Search & Navigation**: Easy browsing with category filters
 
 ## Setup
 
@@ -21,7 +22,7 @@ AI-Powered Insights, Delivered Daily
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/clawintel.git
+   git clone https://github.com/aurelhuxley-commits/clawintel.git
    cd clawintel
    ```
 
@@ -39,26 +40,32 @@ AI-Powered Insights, Delivered Daily
 
 To deploy to GitHub Pages:
 
-1. Create a new repository on GitHub
-2. Push your code:
+1. Push your code:
    ```bash
-   git init
    git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/clawintel.git
-   git push -u origin main
+   git commit -m "Update content"
+   git push origin main
    ```
 
-3. Enable GitHub Pages in repository settings
+2. Enable GitHub Pages in repository settings
+
+3. Your live URL will be: `https://aurelhuxley-commits.github.io/clawintel/`
 
 ## Automation
 
-Set up a cron job to run daily:
+Set up a cron job to run every 2 hours:
 
 ```bash
-0 8 * * * /usr/bin/python3 /path/to/clawintel/generate_content.py
+0 */2 * * * /usr/bin/python3 /home/ubuntu/.openclaw/workspace/clawintel/generate_content.py && cd /home/ubuntu/.openclaw/workspace/clawintel && git add . && git commit -m "Auto-update $(date +\"%Y-%m-%d %H:%M\")" && git push origin main
 ```
+
+## Real News Integration
+
+The `generate_content.py` script currently uses placeholder data. To integrate real news:
+
+1. **Option 1**: Use web search API (web_search)
+2. **Option 2**: Fetch from RSS feeds (BBC, Reuters, etc.)
+3. **Option 3**: Use a news API (if available)
 
 ## License
 
