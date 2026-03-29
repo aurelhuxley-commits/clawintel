@@ -1,25 +1,31 @@
 #!/usr/bin/env python3
 """
-Generate content for ClawIntel with AI-powered images
+Generate AI-powered images for blog posts using DALL·E-style prompts
 """
+import requests
 from datetime import datetime
 
-def generate_ai_image(prompt):
+def generate_ai_image(prompt, size="512x512"):
     """
-    Generate AI-style image URLs
-    In a real implementation, this would call DALL·E API
+    Generate an AI image using DALL·E API
+    For demo purposes, we'll use placeholder URLs with AI-generated style
     """
-    ai_images = {
+    # In a real implementation, we would call the DALL·E API here
+    # For now, we'll use Unsplash images that match the AI style
+    
+    ai_image_urls = {
         "AI robot analyzing data": "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
         "Bitcoin ETF approval": "https://images.unsplash.com/photo-1643797458037-3ff9ea706011?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=350&q=80",
         "NATO meeting": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=350&q=80",
         "Messi signing": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=350&q=80",
         "US debate": "https://images.unsplash.com/photo-1563567310337-5b5e2666a253?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=350&q=80"
     }
-    return ai_images.get(prompt, "https://via.placeholder.com/512?text=AI+Generated+Image")
+    
+    # Return a matching image or a generic AI-style image
+    return ai_image_urls.get(prompt, "https://via.placeholder.com/512?text=AI+Generated+Image")
 
-def fetch_real_news():
-    """Fetch news with AI-generated images"""
+def create_ai_news():
+    """Create news items with AI-generated images"""
     return [
         {
             "title": "AI Breakthrough: New Reasoning Models Released",
@@ -63,62 +69,11 @@ def fetch_real_news():
         }
     ]
 
-def generate_html(news_items):
-    """Generate HTML content from news items"""
-    news_cards = []
-    for news in news_items[1:]:
-        card = f'''
-        <article class="news-card">
-            <img src="{news["image"]}" alt="{news["title"]}" class="news-image" loading="lazy">
-            <div class="news-content">
-                <span class="news-category">{news["category"]}</span>
-                <h3 class="news-title">{news["title"]}</h3>
-                <p class="news-excerpt">{news["excerpt"]}</p>
-                <div class="news-meta">
-                    <span>{news["date"]}</span>
-                    <span class="source">{news["source"]}</span>
-                </div>
-            </div>
-        </article>
-        '''
-        news_cards.append(card)
-    
-    featured = news_items[0]
-    featured_html = f'''
-    <div class="featured-story" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{featured["image"]}'); background-size: cover; background-position: center;">
-        <div class="featured-content">
-            <span class="featured-category">{featured["category"]}</span>
-            <h1 class="featured-title">{featured["title"]}</h1>
-            <p class="featured-excerpt">{featured["excerpt"]}</p>
-        </div>
-    </div>
-    '''
-    
-    return featured_html, "".join(news_cards)
-
-def update_website():
-    """Update the website with AI-powered content"""
-    news_items = fetch_real_news()
-    featured_html, news_grid = generate_html(news_items)
-    
-    with open('index.html', 'r') as f:
-        content = f.read()
-    
-    new_content = content.replace(
-        '<div class="featured-story">...</div>',
-        f'<div class="featured-story">{featured_html}</div>'
-    )
-    new_content = new_content.replace(
-        '<div class="news-grid" id="news-grid">\n            <!-- News cards will be inserted here by JavaScript -->\n        </div>',
-        f'<div class="news-grid" id="news-grid">{news_grid}</div>'
-    )
-    
-    with open('index.html', 'w') as f:
-        f.write(new_content)
-    
-    print("Website updated with AI-powered images!")
-    print(f"Generated {len(news_items)} news items")
-    print(f"Featured story: {news_items[0]['title']}")
-
 if __name__ == "__main__":
-    update_website()
+    news = create_ai_news()
+    print("Generated AI-powered news items:")
+    for item in news:
+        print(f"\nTitle: {item['title']}")
+        print(f"Category: {item['category']}")
+        print(f"Image: {item['image']}")
+        print(f"Source: {item['source']}")
